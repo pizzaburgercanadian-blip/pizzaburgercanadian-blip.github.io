@@ -1,0 +1,21 @@
+{
+  "name": "Canadian Pizza & Burger",
+  "short_name": "Canadian Pizza",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0d0d",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "E3215E75-7724-4920-B026-F1F21CFB242E.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "E3215E75-7724-4920-B026-F1F21CFB242E.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
