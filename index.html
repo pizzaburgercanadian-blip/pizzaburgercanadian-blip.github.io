@@ -13,9 +13,8 @@ color:white;
 }
 
 header{
-background:#111;
-padding:25px;
 text-align:center;
+padding:20px;
 border-bottom:2px solid silver;
 }
 
@@ -33,36 +32,61 @@ margin:5px 0;
 padding:20px;
 }
 
-.menu-item{
+.menu-card{
 background:#1a1a1a;
 padding:15px;
-margin-bottom:12px;
-border-radius:10px;
+margin-bottom:15px;
+border-radius:12px;
 border:1px solid #333;
-display:flex;
-justify-content:space-between;
 }
 
-.price{
-color:silver;
+select, input{
+padding:6px;
+border-radius:6px;
+border:none;
+margin-right:8px;
+}
+
+button{
+background:silver;
+border:none;
+padding:6px 12px;
+border-radius:6px;
+cursor:pointer;
 font-weight:bold;
 }
 
 .offer{
-background:linear-gradient(45deg,#000,#3a3a3a);
-padding:18px;
 margin:20px;
+padding:15px;
 border:2px solid silver;
 border-radius:12px;
 text-align:center;
+background:linear-gradient(45deg,#000,#2a2a2a);
 }
 
-footer{
-background:#111;
-padding:20px;
-text-align:center;
-border-top:2px solid silver;
-margin-top:30px;
+.cart-box{
+position:fixed;
+bottom:20px;
+right:20px;
+background:silver;
+color:black;
+padding:15px;
+border-radius:12px;
+font-weight:bold;
+box-shadow:0 0 10px #000;
+}
+
+.whatsapp{
+position:fixed;
+bottom:20px;
+left:20px;
+background:#25D366;
+color:white;
+padding:15px;
+border-radius:50%;
+font-size:20px;
+text-decoration:none;
 }
 </style>
 </head>
@@ -70,7 +94,7 @@ margin-top:30px;
 <body>
 
 <header>
-<img src="E3215E75-7724-4920-B026-F1F21CFB3380B.jpeg">
+<img src="E3215E75-7724-4920-B026-F1F21CFB242E.png">
 <h1>Canadian Pizza & Burger</h1>
 <p>Banda Road, Khutar, Shahjahanpur</p>
 <p>📞 +91 7992007113</p>
@@ -78,63 +102,103 @@ margin-top:30px;
 </header>
 
 <div class="offer">
-<h2>🔥 Sunday Special 🔥</h2>
-<p>Buy 1 Large Pizza & Get 1 Medium Pizza FREE</p>
+🔥 Sunday Special — Buy 1 Large Pizza & Get 1 Medium FREE
 </div>
 
 <div class="offer">
-<h2>⭐ Wednesday Offer ⭐</h2>
-<p>Buy Any Medium Pizza & Get 1 Burger + 400ml Pepsi FREE</p>
+⭐ Wednesday Offer — Buy Medium Pizza & Get Burger + 400ml Pepsi FREE
 </div>
 
 <div class="section">
-<h2 style="color:silver;">🍕 Pizza Menu</h2>
+<h2>🍕 Pizza Menu</h2>
 
-<div class="menu-item">
-<span>Onion Pizza</span>
-<span class="price">₹150</span>
+<div class="menu-card">
+<b>Onion Pizza</b><br><br>
+<select id="onionSize">
+<option value="150">Regular ₹150</option>
+<option value="250">Medium ₹250</option>
+<option value="350">Large ₹350</option>
+</select>
+<input type="number" id="onionQty" value="1" min="1">
+<button onclick="addToCart('Onion Pizza','onionSize','onionQty')">Add</button>
 </div>
 
-<div class="menu-item">
-<span>Paneer Pizza</span>
-<span class="price">₹160</span>
+<div class="menu-card">
+<b>Paneer Pizza</b><br><br>
+<select id="paneerSize">
+<option value="160">Regular ₹160</option>
+<option value="260">Medium ₹260</option>
+<option value="360">Large ₹360</option>
+</select>
+<input type="number" id="paneerQty" value="1" min="1">
+<button onclick="addToCart('Paneer Pizza','paneerSize','paneerQty')">Add</button>
 </div>
 
-<div class="menu-item">
-<span>Farm Fresh Pizza</span>
-<span class="price">₹190</span>
-</div>
-
-<div class="menu-item">
-<span>Margherita Pizza</span>
-<span class="price">₹140</span>
+<div class="menu-card">
+<b>Farm Fresh Pizza</b><br><br>
+<select id="farmSize">
+<option value="190">Regular ₹190</option>
+<option value="290">Medium ₹290</option>
+<option value="390">Large ₹390</option>
+</select>
+<input type="number" id="farmQty" value="1" min="1">
+<button onclick="addToCart('Farm Fresh Pizza','farmSize','farmQty')">Add</button>
 </div>
 
 </div>
 
 <div class="section">
-<h2 style="color:silver;">🍔 Burger Menu</h2>
+<h2>🍔 Burger Menu</h2>
 
-<div class="menu-item">
-<span>Veg Burger</span>
-<span class="price">₹60</span>
+<div class="menu-card">
+<b>Veg Burger ₹60</b><br><br>
+<input type="number" id="vegQty" value="1" min="1">
+<button onclick="addSimple('Veg Burger',60,'vegQty')">Add</button>
 </div>
 
-<div class="menu-item">
-<span>Cheese Burger</span>
-<span class="price">₹80</span>
-</div>
-
-<div class="menu-item">
-<span>Paneer Burger</span>
-<span class="price">₹90</span>
+<div class="menu-card">
+<b>Cheese Burger ₹80</b><br><br>
+<input type="number" id="cheeseQty" value="1" min="1">
+<button onclick="addSimple('Cheese Burger',80,'cheeseQty')">Add</button>
 </div>
 
 </div>
 
-<footer>
-<p>© 2026 Canadian Pizza & Burger</p>
-</footer>
+<div class="cart-box" id="cartBox">
+Cart: ₹0
+</div>
+
+<a class="whatsapp" id="waBtn" href="#" target="_blank">📲</a>
+
+<script>
+let total = 0;
+let orderText = "Hello, I want to order:%0A";
+
+function addToCart(name,sizeId,qtyId){
+let price = document.getElementById(sizeId).value;
+let qty = document.getElementById(qtyId).value;
+let itemTotal = price * qty;
+total += itemTotal;
+
+orderText += name + " x" + qty + " = ₹" + itemTotal + "%0A";
+updateCart();
+}
+
+function addSimple(name,price,qtyId){
+let qty = document.getElementById(qtyId).value;
+let itemTotal = price * qty;
+total += itemTotal;
+
+orderText += name + " x" + qty + " = ₹" + itemTotal + "%0A";
+updateCart();
+}
+
+function updateCart(){
+document.getElementById("cartBox").innerHTML = "Cart: ₹" + total;
+document.getElementById("waBtn").href =
+"https://wa.me/917992007113?text=" + orderText + "%0ATotal: ₹" + total;
+}
+</script>
 
 </body>
 </html>
