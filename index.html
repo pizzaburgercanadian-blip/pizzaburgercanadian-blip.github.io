@@ -3,41 +3,41 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Canadian Pizza & Burger</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#000000">
 
 <style>
 body{margin:0;font-family:Arial;background:#0d0d0d;color:white}
 header{text-align:center;padding:20px;border-bottom:2px solid silver}
-header img{width:130px}
+header img{width:120px}
 nav{display:flex;overflow:auto;background:#111;padding:10px;position:sticky;top:0;z-index:10}
-nav button{background:#222;color:white;border:none;padding:8px 15px;margin-right:8px;border-radius:20px;cursor:pointer;white-space:nowrap}
+nav button{background:#222;color:white;border:none;padding:8px 15px;margin-right:8px;border-radius:20px;cursor:pointer}
 nav button:hover{background:orange}
 .section{padding:15px}
 .item{background:#1a1a1a;padding:15px;margin-bottom:12px;border-radius:10px}
 select,input{padding:6px;margin-top:5px;border-radius:5px;border:none}
 button.add{background:orange;border:none;padding:6px 12px;color:white;border-radius:6px;margin-top:5px;cursor:pointer}
-.whatsapp{background:green;width:100%;padding:10px;border:none;color:white;margin-top:8px;border-radius:6px;font-size:16px}
 .remove{background:red;color:white;border:none;padding:4px 8px;margin-left:8px;border-radius:4px}
-footer{background:#111;padding:20px;margin-top:80px}
-iframe{width:100%;height:280px;border:0;margin-top:10px}
-h2{border-left:4px solid orange;padding-left:8px}
+.whatsapp{background:green;width:100%;padding:12px;border:none;color:white;margin-top:8px;border-radius:6px;font-size:16px}
 
-/* Sliding Cart */
+/* SLIDING CART */
 .cart{
 position:fixed;
-bottom:-300px;
+bottom:-100%;
 left:0;
 right:0;
 background:#111;
-padding:10px;
+padding:15px;
 border-top:2px solid silver;
-max-height:250px;
+max-height:60vh;
 overflow:auto;
 transition:0.4s;
 z-index:1000;
+box-shadow:0 -5px 20px rgba(0,0,0,0.6);
 }
 .cart.active{bottom:0;}
+
+footer{background:#111;padding:20px;margin-top:80px}
+iframe{width:100%;height:280px;border:0;margin-top:10px}
+h2{border-left:4px solid orange;padding-left:8px}
 </style>
 </head>
 
@@ -72,11 +72,7 @@ z-index:1000;
 
 <footer>
 <h2>About Us</h2>
-<p>
-Welcome to Canadian Pizza & Burger, Khutar’s favorite food destination.
-We proudly serve fresh pizzas, burgers, Chinese dishes, shakes,
-pasta, wraps and special meals with quality ingredients.
-</p>
+<p>Fresh & hygienic pizzas, burgers, Chinese, shakes and more. Affordable pricing with quick service.</p>
 
 <h2>Contact</h2>
 <p>📍 Banda Road, Khutar, Shahjahanpur</p>
@@ -189,13 +185,12 @@ document.getElementById("menuContainer").innerHTML=html;
 }
 
 function addItem(section,item){
-let price;
-if(typeof menuData[section][item]==="object"){
-price=parseInt(document.getElementById(item+"size").value);
-}else{
-price=menuData[section][item];
-}
+let price=typeof menuData[section][item]==="object"
+?parseInt(document.getElementById(item+"size").value)
+:menuData[section][item];
+
 let qty=parseInt(document.getElementById(item+"qty").value);
+
 cart.push({name:item,qty:qty,price:price});
 total+=price*qty;
 updateCart();
@@ -204,11 +199,15 @@ updateCart();
 function updateCart(){
 let html="";
 cart.forEach((c,index)=>{
-html+=c.name+" x"+c.qty+" = ₹"+(c.price*c.qty)+" <button class='remove' onclick='removeItem("+index+")'>X</button><br>";
+html+=c.name+" x"+c.qty+" = ₹"+(c.price*c.qty)
++" <button class='remove' onclick='removeItem("+index+")'>X</button><br>";
 });
 document.getElementById("cartItems").innerHTML=html;
 document.getElementById("total").innerText=total;
-cart.length>0 ? cartBox.classList.add("active") : cartBox.classList.remove("active");
+
+cart.length>0
+?cartBox.classList.add("active")
+:cartBox.classList.remove("active");
 }
 
 function removeItem(index){
@@ -229,12 +228,6 @@ window.open("https://wa.me/917992007113?text="+message);
 
 showSection('pizza');
 
-</script>
-
-<script>
-if ('serviceWorker' in navigator) {
-navigator.serviceWorker.register('service-worker.js');
-}
 </script>
 
 </body>
