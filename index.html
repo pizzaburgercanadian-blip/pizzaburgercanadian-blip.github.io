@@ -13,16 +13,31 @@ header img{width:130px}
 nav{display:flex;overflow:auto;background:#111;padding:10px;position:sticky;top:0;z-index:10}
 nav button{background:#222;color:white;border:none;padding:8px 15px;margin-right:8px;border-radius:20px;cursor:pointer;white-space:nowrap}
 nav button:hover{background:orange}
-.section{display:none;padding:15px}
+.section{padding:15px}
 .item{background:#1a1a1a;padding:15px;margin-bottom:12px;border-radius:10px}
 select,input{padding:6px;margin-top:5px;border-radius:5px;border:none}
 button.add{background:orange;border:none;padding:6px 12px;color:white;border-radius:6px;margin-top:5px;cursor:pointer}
-.cart{position:fixed;bottom:0;left:0;right:0;background:#111;padding:10px;border-top:2px solid silver;max-height:250px;overflow:auto}
 .whatsapp{background:green;width:100%;padding:10px;border:none;color:white;margin-top:8px;border-radius:6px;font-size:16px}
 .remove{background:red;color:white;border:none;padding:4px 8px;margin-left:8px;border-radius:4px}
 footer{background:#111;padding:20px;margin-top:80px}
 iframe{width:100%;height:280px;border:0;margin-top:10px}
 h2{border-left:4px solid orange;padding-left:8px}
+
+/* Sliding Cart */
+.cart{
+position:fixed;
+bottom:-300px;
+left:0;
+right:0;
+background:#111;
+padding:10px;
+border-top:2px solid silver;
+max-height:250px;
+overflow:auto;
+transition:0.4s;
+z-index:1000;
+}
+.cart.active{bottom:0;}
 </style>
 </head>
 
@@ -59,10 +74,8 @@ h2{border-left:4px solid orange;padding-left:8px}
 <h2>About Us</h2>
 <p>
 Welcome to Canadian Pizza & Burger, Khutar’s favorite food destination.
-We proudly serve freshly prepared pizzas, burgers, Chinese dishes, shakes,
-pasta, wraps and special meals using high-quality ingredients.
-Our goal is simple — delicious taste, hygienic preparation,
-affordable pricing and quick service for every customer.
+We proudly serve fresh pizzas, burgers, Chinese dishes, shakes,
+pasta, wraps and special meals with quality ingredients.
 </p>
 
 <h2>Contact</h2>
@@ -70,9 +83,8 @@ affordable pricing and quick service for every customer.
 <p>📞 +91 7992007113</p>
 
 <h2>Our Location</h2>
-<iframe 
-src="https://www.google.com/maps?q=Banda%20road,%20Khutar,%20Narainpur%20Vikrampur,%20Uttar%20Pradesh%20242405&output=embed">
-</iframe>
+<iframe src="https://www.google.com/maps?q=Banda%20road,%20Khutar,%20Narainpur%20Vikrampur,%20Uttar%20Pradesh%20242405&output=embed"></iframe>
+</footer>
 
 <script>
 
@@ -83,79 +95,61 @@ pizza:{
 "Tomato":{Small:60,Regular:90,Medium:180,Large:280},
 "Sweet Corn":{Small:60,Regular:90,Medium:180,Large:280},
 "Onion":{Regular:150,ExtraRegular:170,Medium:250,Large:350},
+"Sweet Corn Paneer":{Regular:160,ExtraRegular:180,Medium:260,Large:360},
+"Mushroom":{Regular:150,ExtraRegular:170,Medium:250,Large:360},
 "Paneer":{Regular:160,ExtraRegular:180,Medium:270,Large:450},
+"Paneer Makhani":{Regular:170,ExtraRegular:180,Medium:280,Large:460},
+"Black Olive":{Regular:170,ExtraRegular:190,Medium:280,Large:460},
+"Mexicana":{Regular:180,ExtraRegular:190,Medium:290,Large:450},
+"Jumbo":{Regular:180,ExtraRegular:200,Medium:310,Large:480},
+"Paneer Do Pyaza":{Regular:180,ExtraRegular:210,Medium:310,Large:480},
 "Farm Fresh":{Regular:190,ExtraRegular:220,Medium:320,Large:490},
+"Tandoori":{Regular:200,ExtraRegular:220,Medium:330,Large:510},
+"Achari":{Regular:200,ExtraRegular:220,Medium:330,Large:510},
+"Special Four Cheese":{Regular:210,ExtraRegular:230,Medium:350,Large:480},
+"Canadian Spicy":{Regular:220,ExtraRegular:240,Medium:360,Large:500},
 "Punjabi":{Regular:230,ExtraRegular:280,Medium:350,Large:510}
 },
 
 burger:{
-"Happy Price":40,
-"Regular":50,
-"Noodle":60,
-"Special":70,
-"Royal":80,
-"Chizzy":100,
-"Canadian Double Decker":130
+"Happy Price":40,"Regular":50,"Noodle":60,"Special":70,
+"Royal":80,"Chizzy":100,"Canadian Double Decker":130
 },
 
 chinese:{
-"Veg Noodles":50,
-"Paneer Noodles":80,
-"Haaka Noodles":70,
-"Special Haaka Noodles":100,
-"Dry Manchurian":60,
-"Gravy Manchurian":70,
-"Fried Rice":70,
-"Paneer Fried Rice":90,
-"Fried Rice + Manchurian":120,
-"Chilli Potato":60,
-"Chilli Paneer Half":90,
-"Chilli Paneer Full":160
+"Veg Noodles":50,"Paneer Noodles":80,"Haaka Noodles":70,
+"Special Haaka Noodles":100,"Dry Manchurian":60,
+"Gravy Manchurian":70,"Fried Rice":70,
+"Paneer Fried Rice":90,"Fried Rice + Manchurian":120,
+"Chilli Potato":60,"Chilli Paneer Half":90,"Chilli Paneer Full":160
 },
 
 shakes:{
-"Cold Coffee (Regular)":50,
-"Cold Coffee (Special)":100,
-"Strawberry (Regular)":60,
-"Strawberry (Special)":110,
-"Chocolate (Regular)":70,
-"Chocolate (Special)":120,
-"Oreo (Regular)":70,
-"Oreo (Special)":120,
-"Butter Scotch (Regular)":80,
-"Butter Scotch (Special)":130,
-"Mango (Regular)":70,
-"Mango (Special)":120,
-"Kiwi (Regular)":90,
-"Kiwi (Special)":140,
-"Banana (Regular)":70,
-"Banana (Special)":120,
-"Black Currant (Regular)":120,
-"Black Currant (Special)":150,
-"Pineapple (Regular)":70,
-"Pineapple (Special)":120
+"Cold Coffee (Regular)":50,"Cold Coffee (Special)":100,
+"Strawberry (Regular)":60,"Strawberry (Special)":110,
+"Chocolate (Regular)":70,"Chocolate (Special)":120,
+"Oreo (Regular)":70,"Oreo (Special)":120,
+"Butter Scotch (Regular)":80,"Butter Scotch (Special)":130,
+"Mango (Regular)":70,"Mango (Special)":120,
+"Kiwi (Regular)":90,"Kiwi (Special)":140,
+"Banana (Regular)":70,"Banana (Special)":120,
+"Black Currant (Regular)":120,"Black Currant (Special)":150,
+"Pineapple (Regular)":70,"Pineapple (Special)":120
 },
 
 pasta:{
-"White Pasta":90,
-"Mix Pasta":100,
-"Tandoori Pasta":110,
-"Pari Pari Pasta":120,
-"Makhani Pasta":120,
+"White Pasta":90,"Mix Pasta":100,"Tandoori Pasta":110,
+"Pari Pari Pasta":120,"Makhani Pasta":120,
 "Canadian Special Pasta":140
 },
 
 wrap:{
-"Veg Wrap":70,
-"Tosho Wrap":80,
-"Paneer Wrap":90,
-"Punjabi Wrap":100,
-"Special Wrap":110
+"Veg Wrap":70,"Tosho Wrap":80,"Paneer Wrap":90,
+"Punjabi Wrap":100,"Special Wrap":110
 },
 
 kulhad:{
-"Veg Kulhad Pizza":50,
-"Tandoori Kulhad Pizza":70,
+"Veg Kulhad Pizza":50,"Tandoori Kulhad Pizza":70,
 "Paneer Kulhad Pizza":120
 },
 
@@ -171,9 +165,10 @@ meals:{
 
 let cart=[];
 let total=0;
+const cartBox=document.querySelector(".cart");
 
 function showSection(section){
-let html="<div class='section' style='display:block'><h2>"+section.toUpperCase()+"</h2>";
+let html="<div class='section'><h2>"+section.toUpperCase()+"</h2>";
 for(let item in menuData[section]){
 html+="<div class='item'><b>"+item+"</b><br>";
 if(typeof menuData[section][item]==="object"){
@@ -213,6 +208,7 @@ html+=c.name+" x"+c.qty+" = ₹"+(c.price*c.qty)+" <button class='remove' onclic
 });
 document.getElementById("cartItems").innerHTML=html;
 document.getElementById("total").innerText=total;
+cart.length>0 ? cartBox.classList.add("active") : cartBox.classList.remove("active");
 }
 
 function removeItem(index){
@@ -232,11 +228,12 @@ window.open("https://wa.me/917992007113?text="+message);
 }
 
 showSection('pizza');
-  </script>
+
+</script>
+
 <script>
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js')
-  .then(function() { console.log("Service Worker Registered"); });
+navigator.serviceWorker.register('service-worker.js');
 }
 </script>
 
