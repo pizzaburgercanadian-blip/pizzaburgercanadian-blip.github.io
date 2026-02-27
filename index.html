@@ -23,14 +23,9 @@ width:140px;
 margin-bottom:10px;
 }
 
-h1{
-color:silver;
-margin:5px 0;
-}
+h1{color:silver;}
 
-.section{
-padding:20px;
-}
+.section{padding:20px;}
 
 .menu-card{
 background:#1a1a1a;
@@ -40,7 +35,7 @@ border-radius:12px;
 border:1px solid #333;
 }
 
-select, input{
+select,input{
 padding:6px;
 border-radius:6px;
 border:none;
@@ -74,7 +69,6 @@ color:black;
 padding:15px;
 border-radius:12px;
 font-weight:bold;
-box-shadow:0 0 10px #000;
 }
 
 .whatsapp{
@@ -98,7 +92,7 @@ text-decoration:none;
 <h1>Canadian Pizza & Burger</h1>
 <p>Banda Road, Khutar, Shahjahanpur</p>
 <p>📞 +91 7992007113</p>
-<p>🕒 Open Daily: 10:00 AM – 11:00 PM</p>
+<p>🕒 10:00 AM – 11:00 PM</p>
 </header>
 
 <div class="offer">
@@ -106,12 +100,13 @@ text-decoration:none;
 </div>
 
 <div class="offer">
-⭐ Wednesday Offer — Buy Medium Pizza & Get Burger + 400ml Pepsi FREE
+⭐ Wednesday Offer — Medium Pizza + Burger + 400ml Pepsi FREE
 </div>
 
 <div class="section">
 <h2>🍕 Pizza Menu</h2>
 
+<!-- Onion -->
 <div class="menu-card">
 <b>Onion Pizza</b><br><br>
 <select id="onionSize">
@@ -120,9 +115,10 @@ text-decoration:none;
 <option value="350">Large ₹350</option>
 </select>
 <input type="number" id="onionQty" value="1" min="1">
-<button onclick="addToCart('Onion Pizza','onionSize','onionQty')">Add</button>
+<button onclick="addItem('Onion Pizza','onionSize','onionQty')">Add</button>
 </div>
 
+<!-- Paneer -->
 <div class="menu-card">
 <b>Paneer Pizza</b><br><br>
 <select id="paneerSize">
@@ -131,9 +127,10 @@ text-decoration:none;
 <option value="360">Large ₹360</option>
 </select>
 <input type="number" id="paneerQty" value="1" min="1">
-<button onclick="addToCart('Paneer Pizza','paneerSize','paneerQty')">Add</button>
+<button onclick="addItem('Paneer Pizza','paneerSize','paneerQty')">Add</button>
 </div>
 
+<!-- Farm Fresh -->
 <div class="menu-card">
 <b>Farm Fresh Pizza</b><br><br>
 <select id="farmSize">
@@ -142,7 +139,19 @@ text-decoration:none;
 <option value="390">Large ₹390</option>
 </select>
 <input type="number" id="farmQty" value="1" min="1">
-<button onclick="addToCart('Farm Fresh Pizza','farmSize','farmQty')">Add</button>
+<button onclick="addItem('Farm Fresh Pizza','farmSize','farmQty')">Add</button>
+</div>
+
+<!-- Margherita -->
+<div class="menu-card">
+<b>Margherita Pizza</b><br><br>
+<select id="marSize">
+<option value="140">Regular ₹140</option>
+<option value="240">Medium ₹240</option>
+<option value="340">Large ₹340</option>
+</select>
+<input type="number" id="marQty" value="1" min="1">
+<button onclick="addItem('Margherita Pizza','marSize','marQty')">Add</button>
 </div>
 
 </div>
@@ -162,6 +171,40 @@ text-decoration:none;
 <button onclick="addSimple('Cheese Burger',80,'cheeseQty')">Add</button>
 </div>
 
+<div class="menu-card">
+<b>Paneer Burger ₹90</b><br><br>
+<input type="number" id="paneerBQty" value="1" min="1">
+<button onclick="addSimple('Paneer Burger',90,'paneerBQty')">Add</button>
+</div>
+
+</div>
+
+<div class="section">
+<h2>🥤 Cold Drinks</h2>
+
+<div class="menu-card">
+<b>Pepsi 400ml ₹40</b><br><br>
+<input type="number" id="pepsiQty" value="1" min="1">
+<button onclick="addSimple('Pepsi 400ml',40,'pepsiQty')">Add</button>
+</div>
+
+<div class="menu-card">
+<b>Thumbs Up ₹40</b><br><br>
+<input type="number" id="thumbQty" value="1" min="1">
+<button onclick="addSimple('Thumbs Up',40,'thumbQty')">Add</button>
+</div>
+
+</div>
+
+<div class="section">
+<h2>🥪 Sandwich</h2>
+
+<div class="menu-card">
+<b>Tandoori Sandwich ₹120</b><br><br>
+<input type="number" id="sandQty" value="1" min="1">
+<button onclick="addSimple('Tandoori Sandwich',120,'sandQty')">Add</button>
+</div>
+
 </div>
 
 <div class="cart-box" id="cartBox">
@@ -174,7 +217,7 @@ Cart: ₹0
 let total = 0;
 let orderText = "Hello, I want to order:%0A";
 
-function addToCart(name,sizeId,qtyId){
+function addItem(name,sizeId,qtyId){
 let price = document.getElementById(sizeId).value;
 let qty = document.getElementById(qtyId).value;
 let itemTotal = price * qty;
