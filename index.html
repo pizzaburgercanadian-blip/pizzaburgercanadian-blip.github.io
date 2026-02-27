@@ -6,81 +6,65 @@
 
 <style>
 body{
-margin:0;
-font-family:Arial, sans-serif;
-background:#0d0d0d;
-color:white;
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0d0d0d;
+  color:white;
 }
-
 header{
-text-align:center;
-padding:20px;
-border-bottom:2px solid silver;
+  text-align:center;
+  padding:20px;
+  border-bottom:2px solid silver;
 }
-
-header img{
-width:140px;
-margin-bottom:10px;
+h1{margin:5px 0;}
+.section{padding:15px;}
+.category-title{
+  font-size:22px;
+  margin:20px 0 10px;
+  border-left:4px solid orange;
+  padding-left:8px;
 }
-
-h1{color:silver;}
-
-.section{padding:20px;}
-
-.menu-card{
-background:#1a1a1a;
-padding:15px;
-margin-bottom:15px;
-border-radius:12px;
-border:1px solid #333;
+.item{
+  background:#1a1a1a;
+  padding:15px;
+  margin-bottom:12px;
+  border-radius:10px;
 }
-
 select,input{
-padding:6px;
-border-radius:6px;
-border:none;
-margin-right:8px;
+  padding:6px;
+  margin-top:5px;
 }
-
 button{
-background:silver;
-border:none;
-padding:6px 12px;
-border-radius:6px;
-cursor:pointer;
-font-weight:bold;
+  background:orange;
+  border:none;
+  padding:8px 12px;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+  margin-top:5px;
 }
-
-.offer{
-margin:20px;
-padding:15px;
-border:2px solid silver;
-border-radius:12px;
-text-align:center;
-background:linear-gradient(45deg,#000,#2a2a2a);
+.cart{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#111;
+  padding:10px;
+  border-top:2px solid silver;
+  max-height:250px;
+  overflow:auto;
 }
-
-.cart-box{
-position:fixed;
-bottom:20px;
-right:20px;
-background:silver;
-color:black;
-padding:15px;
-border-radius:12px;
-font-weight:bold;
-}
-
+.cart h3{margin:5px 0;}
 .whatsapp{
-position:fixed;
-bottom:20px;
-left:20px;
-background:#25D366;
-color:white;
-padding:15px;
-border-radius:50%;
-font-size:20px;
-text-decoration:none;
+  background:green;
+  width:100%;
+  margin-top:5px;
+}
+.remove-btn{
+  background:red;
+  padding:4px 6px;
+  margin-left:10px;
+  font-size:12px;
 }
 </style>
 </head>
@@ -88,159 +72,188 @@ text-decoration:none;
 <body>
 
 <header>
-<img src="E3215E75-7724-4920-B026-F1F21CFB242E.png">
 <h1>Canadian Pizza & Burger</h1>
 <p>Banda Road, Khutar, Shahjahanpur</p>
 <p>📞 +91 7992007113</p>
-<p>🕒 10:00 AM – 11:00 PM</p>
 </header>
 
-<div class="offer">
-🔥 Sunday Special — Buy 1 Large Pizza & Get 1 Medium FREE
+<div class="section" id="menu"></div>
+
+<div class="cart">
+<h3>🛒 Cart</h3>
+<div id="cartItems"></div>
+<h3>Total: ₹<span id="total">0</span></h3>
+<button class="whatsapp" onclick="sendWhatsApp()">Order on WhatsApp</button>
 </div>
-
-<div class="offer">
-⭐ Wednesday Offer — Medium Pizza + Burger + 400ml Pepsi FREE
-</div>
-
-<div class="section">
-<h2>🍕 Pizza Menu</h2>
-
-<!-- Onion -->
-<div class="menu-card">
-<b>Onion Pizza</b><br><br>
-<select id="onionSize">
-<option value="150">Regular ₹150</option>
-<option value="250">Medium ₹250</option>
-<option value="350">Large ₹350</option>
-</select>
-<input type="number" id="onionQty" value="1" min="1">
-<button onclick="addItem('Onion Pizza','onionSize','onionQty')">Add</button>
-</div>
-
-<!-- Paneer -->
-<div class="menu-card">
-<b>Paneer Pizza</b><br><br>
-<select id="paneerSize">
-<option value="160">Regular ₹160</option>
-<option value="260">Medium ₹260</option>
-<option value="360">Large ₹360</option>
-</select>
-<input type="number" id="paneerQty" value="1" min="1">
-<button onclick="addItem('Paneer Pizza','paneerSize','paneerQty')">Add</button>
-</div>
-
-<!-- Farm Fresh -->
-<div class="menu-card">
-<b>Farm Fresh Pizza</b><br><br>
-<select id="farmSize">
-<option value="190">Regular ₹190</option>
-<option value="290">Medium ₹290</option>
-<option value="390">Large ₹390</option>
-</select>
-<input type="number" id="farmQty" value="1" min="1">
-<button onclick="addItem('Farm Fresh Pizza','farmSize','farmQty')">Add</button>
-</div>
-
-<!-- Margherita -->
-<div class="menu-card">
-<b>Margherita Pizza</b><br><br>
-<select id="marSize">
-<option value="140">Regular ₹140</option>
-<option value="240">Medium ₹240</option>
-<option value="340">Large ₹340</option>
-</select>
-<input type="number" id="marQty" value="1" min="1">
-<button onclick="addItem('Margherita Pizza','marSize','marQty')">Add</button>
-</div>
-
-</div>
-
-<div class="section">
-<h2>🍔 Burger Menu</h2>
-
-<div class="menu-card">
-<b>Veg Burger ₹60</b><br><br>
-<input type="number" id="vegQty" value="1" min="1">
-<button onclick="addSimple('Veg Burger',60,'vegQty')">Add</button>
-</div>
-
-<div class="menu-card">
-<b>Cheese Burger ₹80</b><br><br>
-<input type="number" id="cheeseQty" value="1" min="1">
-<button onclick="addSimple('Cheese Burger',80,'cheeseQty')">Add</button>
-</div>
-
-<div class="menu-card">
-<b>Paneer Burger ₹90</b><br><br>
-<input type="number" id="paneerBQty" value="1" min="1">
-<button onclick="addSimple('Paneer Burger',90,'paneerBQty')">Add</button>
-</div>
-
-</div>
-
-<div class="section">
-<h2>🥤 Cold Drinks</h2>
-
-<div class="menu-card">
-<b>Pepsi 400ml ₹40</b><br><br>
-<input type="number" id="pepsiQty" value="1" min="1">
-<button onclick="addSimple('Pepsi 400ml',40,'pepsiQty')">Add</button>
-</div>
-
-<div class="menu-card">
-<b>Thumbs Up ₹40</b><br><br>
-<input type="number" id="thumbQty" value="1" min="1">
-<button onclick="addSimple('Thumbs Up',40,'thumbQty')">Add</button>
-</div>
-
-</div>
-
-<div class="section">
-<h2>🥪 Sandwich</h2>
-
-<div class="menu-card">
-<b>Tandoori Sandwich ₹120</b><br><br>
-<input type="number" id="sandQty" value="1" min="1">
-<button onclick="addSimple('Tandoori Sandwich',120,'sandQty')">Add</button>
-</div>
-
-</div>
-
-<div class="cart-box" id="cartBox">
-Cart: ₹0
-</div>
-
-<a class="whatsapp" id="waBtn" href="#" target="_blank">📲</a>
 
 <script>
-let total = 0;
-let orderText = "Hello, I want to order:%0A";
 
-function addItem(name,sizeId,qtyId){
-let price = document.getElementById(sizeId).value;
-let qty = document.getElementById(qtyId).value;
-let itemTotal = price * qty;
-total += itemTotal;
+const menuData = {
 
-orderText += name + " x" + qty + " = ₹" + itemTotal + "%0A";
-updateCart();
+"Pizzas (4 Sizes)": {
+  "Margherita": {Small:60, Regular:80, Medium:170, Large:270},
+  "Tomato Pizza": {Small:60, Regular:90, Medium:180, Large:280},
+  "Sweet Corn Pizza": {Small:60, Regular:90, Medium:180, Large:280},
+  "Onion Pizza": {Regular:150, ExtraRegular:170, Medium:250, Large:350},
+  "Sweet Corn Paneer": {Regular:160, ExtraRegular:180, Medium:260, Large:360},
+  "Mushroom Pizza": {Regular:150, ExtraRegular:170, Medium:250, Large:360},
+  "Paneer Pizza": {Regular:160, ExtraRegular:180, Medium:270, Large:450},
+  "Paneer Makhani": {Regular:170, ExtraRegular:180, Medium:280, Large:460},
+  "Black Olive": {Regular:170, ExtraRegular:190, Medium:280, Large:460},
+  "Mexicana": {Regular:180, ExtraRegular:190, Medium:290, Large:450},
+  "Jumbo Pizza": {Regular:180, ExtraRegular:200, Medium:310, Large:480},
+  "Paneer Do Pyaza": {Regular:180, ExtraRegular:210, Medium:310, Large:480},
+  "Farm Fresh": {Regular:190, ExtraRegular:220, Medium:320, Large:490},
+  "Tandoori Pizza": {Regular:200, ExtraRegular:220, Medium:330, Large:510},
+  "Achari Pizza": {Regular:200, ExtraRegular:220, Medium:330, Large:510},
+  "Special Four Cheese": {Regular:210, ExtraRegular:230, Medium:350, Large:480},
+  "Canadian Spicy": {Regular:220, ExtraRegular:240, Medium:360, Large:500},
+  "Punjabi Pizza": {Regular:230, ExtraRegular:280, Medium:350, Large:510}
+},
+
+"Burgers": {
+  "Happy Price Burger":40,
+  "Regular Burger":50,
+  "Noodle Burger":60,
+  "Special Burger":70,
+  "Royal Burger":80,
+  "Chizzy Burger":100,
+  "Canadian Double Decker":130
+},
+
+"Garlic Bread": {
+  "Garlic Bread with Cheese":90,
+  "Garlic Bread with Sweet Corn":110,
+  "Garlic Bread Cheese & Veggies":130
+},
+
+"Wrap": {
+  "Veg Wrap":70,
+  "Tosho Wrap":80,
+  "Paneer Wrap":90,
+  "Punjabi Wrap":100,
+  "Special Wrap":110
+},
+
+"Kulhad Pizza": {
+  "Veg Kulhad Pizza":50,
+  "Tandoori Kulhad Pizza":70,
+  "Paneer Kulhad Pizza":120
+},
+
+"Chinese": {
+  "Veg Noodles":50,
+  "Paneer Noodles":80,
+  "Haaka Noodles":70,
+  "Special Hakka Noodles":100,
+  "Dry Manchurian":60,
+  "Gravy Manchurian":70,
+  "Fried Rice":70,
+  "Paneer Fried Rice":90,
+  "Fried Rice + Manchurian":120,
+  "Chilli Potato":60,
+  "Chilli Paneer Half":90,
+  "Chilli Paneer Full":160
+},
+
+"Shakes": {
+  "Cold Coffee (Reg)":50,
+  "Cold Coffee (Special)":100,
+  "Strawberry Shake (Reg)":60,
+  "Strawberry Shake (Special)":110,
+  "Chocolate Shake (Reg)":70,
+  "Chocolate Shake (Special)":120,
+  "Oreo Shake (Reg)":70,
+  "Oreo Shake (Special)":120,
+  "Butter Scotch (Reg)":80,
+  "Butter Scotch (Special)":130,
+  "Mango Shake (Reg)":70,
+  "Mango Shake (Special)":120,
+  "Kiwi Shake (Reg)":90,
+  "Kiwi Shake (Special)":140,
+  "Banana Shake (Reg)":70,
+  "Banana Shake (Special)":120,
+  "Black Currant (Reg)":120,
+  "Black Currant (Special)":150,
+  "Pineapple (Reg)":70,
+  "Pineapple (Special)":120
 }
 
-function addSimple(name,price,qtyId){
-let qty = document.getElementById(qtyId).value;
-let itemTotal = price * qty;
-total += itemTotal;
+};
 
-orderText += name + " x" + qty + " = ₹" + itemTotal + "%0A";
-updateCart();
+let cart = [];
+let total = 0;
+
+function generateMenu(){
+  const container = document.getElementById("menu");
+
+  for(let category in menuData){
+    let title = document.createElement("div");
+    title.className = "category-title";
+    title.innerText = category;
+    container.appendChild(title);
+
+    for(let item in menuData[category]){
+      let div = document.createElement("div");
+      div.className = "item";
+
+      let content = "<b>"+item+"</b><br>";
+
+      if(typeof menuData[category][item] === "object"){
+        content += "<select id='"+item+"size'>";
+        for(let size in menuData[category][item]){
+          content += "<option value='"+menuData[category][item][size]+"'>"+size+" - ₹"+menuData[category][item][size]+"</option>";
+        }
+        content += "</select>";
+      }else{
+        content += "₹"+menuData[category][item];
+      }
+
+      content += "<br><input type='number' min='1' value='1' id='"+item+"qty'>";
+      content += "<br><button onclick=\"addToCart('"+category+"','"+item+"')\">Add</button>";
+
+      div.innerHTML = content;
+      container.appendChild(div);
+    }
+  }
+}
+
+function addToCart(category,item){
+  let price;
+  if(typeof menuData[category][item] === "object"){
+    price = document.getElementById(item+"size").value;
+  }else{
+    price = menuData[category][item];
+  }
+
+  let qty = document.getElementById(item+"qty").value;
+
+  cart.push(item+" x"+qty);
+  total += price * qty;
+  updateCart();
 }
 
 function updateCart(){
-document.getElementById("cartBox").innerHTML = "Cart: ₹" + total;
-document.getElementById("waBtn").href =
-"https://wa.me/917992007113?text=" + orderText + "%0ATotal: ₹" + total;
+  let html="";
+  cart.forEach((c,index)=>{
+    html += c + " <button class='remove-btn' onclick='removeItem("+index+")'>X</button><br>";
+  });
+  document.getElementById("cartItems").innerHTML = html;
+  document.getElementById("total").innerText = total;
 }
+
+function removeItem(index){
+  cart.splice(index,1);
+  updateCart();
+}
+
+function sendWhatsApp(){
+  let message="Order:%0A"+cart.join("%0A")+"%0ATotal: ₹"+total;
+  window.open("https://wa.me/917992007113?text="+message);
+}
+
+generateMenu();
+
 </script>
 
 </body>
